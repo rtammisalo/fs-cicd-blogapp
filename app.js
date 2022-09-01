@@ -19,6 +19,10 @@ app.use('/api/login', loginRouter)
 app.use('/api/blogs', middleware.userExtractor, blogsRouter)
 app.use('/api/users', usersRouter)
 
+if (config.NODE_ENV === 'production') {
+  app.use(express.static('build'))
+}
+
 if (process.env.NODE_ENV === 'test') {
   console.log('Running in TEST mode')
   const resetRouter = require('./controllers/reset')
