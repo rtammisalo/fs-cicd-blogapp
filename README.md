@@ -1,4 +1,7 @@
-# Blogilista
+# BlogApp
+
+
+## Backend
 
 Lisää puuttuva `.env` tiedosto projektin juureen. Sisältönä:
 

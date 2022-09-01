@@ -4,12 +4,25 @@ module.exports = {
     'commonjs': true,
     'es2021': true,
     'node': true,
-    'jest': true
+    'jest': true,
+    'es6': true,
+    'cypress/globals': true
   },
-  'extends': 'eslint:recommended',
+  'extends': [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended'
+  ],
   'parserOptions': {
-    'ecmaVersion': 'latest'
+    'ecmaFeatures': {
+      'jsx': true
+    },
+    'ecmaVersion': 2018,
+    'sourceType': 'module'
   },
+  'plugins': [
+    'react', 'jest', 'cypress'
+  ],
   'rules': {
     'indent': [
       'error',
@@ -37,5 +50,12 @@ module.exports = {
       'error', { 'before': true, 'after': true }
     ],
     'no-console': 0,
+    'react/prop-types': 0,
+    'react/react-in-jsx-scope': 'off'
+  },
+  'settings': {
+    'react': {
+      'version': 'detect'
+    }
   }
 }
