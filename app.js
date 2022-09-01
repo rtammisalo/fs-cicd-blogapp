@@ -19,7 +19,7 @@ app.use('/api/login', loginRouter)
 app.use('/api/blogs', middleware.userExtractor, blogsRouter)
 app.use('/api/users', usersRouter)
 
-if (config.NODE_ENV === 'production') {
+if (config.NODE_ENV !== 'development') {
   app.use(express.static('build'))
 }
 

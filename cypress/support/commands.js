@@ -30,7 +30,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
     password,
   }).then(({ body }) => {
     localStorage.setItem('loggedUser', JSON.stringify(body))
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3003/')
   })
 })
 
@@ -53,5 +53,5 @@ Cypress.Commands.add('likeBlog', (blogAlias, previousLikes) => {
   cy.get(`@${blogAlias}`).click()
   cy.contains('like').click()
   cy.contains(`${previousLikes + 1} likes`)
-  cy.visit('http://localhost:3000')
+  cy.visit('http://localhost:3003/')
 })

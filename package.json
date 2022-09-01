@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "backend-start": "cross-env NODE_ENV=production node index.js",
-    "backend-start:test": "cross-env NODE_ENV=test node index.js",
     "backend-dev": "cross-env NODE_ENV=development nodemon index.js",
     "frontend-start": "cross-env PORT=3000 react-scripts start",
     "build": "react-scripts build",
+    "start-test": "cross-env NODE_ENV=test node index.js",
     "start-prod": "cross-env NODE_ENV=production node index.js",
     "lint": "eslint .",
     "eslint": "eslint .",
-    "test:backend": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit",
+    "eject": "react-scripts eject",
+    "test:backend": "cross-env NODE_ENV=test jest tests/ --verbose --runInBand --forceExit",
     "test:e2e": "cypress run",
     "cypress:open": "cypress open"
   },

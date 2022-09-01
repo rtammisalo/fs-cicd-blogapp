@@ -33,7 +33,7 @@ describe('Blog app', function () {
     cy.request('POST', 'http://localhost:3003/api/test/reset')
     cy.request('POST', 'http://localhost:3003/api/users', userKekkonen)
     cy.request('POST', 'http://localhost:3003/api/users', userKakkonen)
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3003/')
   })
 
   it('login form is shown', function () {
@@ -108,7 +108,7 @@ describe('Blog app', function () {
       )
     })
 
-    it("Another use's blog cannot be removed", function () {
+    it('Another user\'s blog cannot be removed', function () {
       cy.login(userKakkonen)
       cy.contains(`${blogs[0].title} ${blogs[0].author}`).as('blogElement')
       cy.get('@blogElement').click()
