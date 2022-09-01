@@ -1,0 +1,39 @@
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "jjokunen",
+    "password": "salainen",
+    "name": "Jaska Jokunen"
+}
+
+###
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "iasimov",
+    "password": "huonosalasana",
+    "name": "Isaac Asimov"
+}
+
+
+### Small name
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "ia",
+    "password": "huonosalasana",
+    "name": "Isaac Asimov"
+}
+
+### Small password
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "unused",
+    "password": "hs",
+    "name": "Isaac Asimov"
+}

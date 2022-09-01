@@ -1,0 +1,52 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Ohjelmoinnista, osa 1",
+    "author": "Ada Lovelace",
+    "url": "www.blogitus.fi/ada/ohj1",
+    "likes": 3
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Ohjelmoinnista, osa 2",
+    "author": "Ada Lovelace",
+    "url": "www.blogitus.fi/ada/ohj2",
+    "likes": 6
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Ohjelmoinnista, osa 3",
+    "author": "Ada Lovelace",
+    "url": "www.blogitus.fi/ada/ohj3",
+    "likes": 12
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer
+
+{
+    "title": "Go To Statement Considered Harmful",
+    "author": "Edsger W. Dijkstra",
+    "url": "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
+    "likes": 23
+}
+
+### Comment
+POST http://localhost:3003/api/blogs/62f0076546e3160947e3c40e/comments
+Content-Type: application/json
+Authorization: bearer
+
+{
+    "content": "Hei siellä!"
+}
