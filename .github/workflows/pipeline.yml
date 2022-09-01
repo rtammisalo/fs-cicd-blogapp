@@ -33,12 +33,26 @@ jobs:
       - name: test backend
         run: |
           npm run start-test &
-          sleep 10 &
+          sleep 5 &&
           npm run test:backend
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
-          # start: npm run start-test
           wait-on: http://localhost:3003/
     outputs:
       SKIP_DEPLOY: ${{ env.SKIP_DEPLOY }}
+
+  tag_release:
+    needs: simple_deployment_pipeline
+    runs-on: ubuntu-20.04
+    environment: Deployment
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@3840ec22ac98e14d981375e3ae2d8d0392964521
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+        if: ${{ (github.event_name == 'push') && (needs.simple_deployment_pipeline.outputs.SKIP_DEPLOY == 'false') }}
