@@ -24,7 +24,7 @@ app.get('/health', (_req, res) => {
 })
 
 app.get('/version', (_req, res) => {
-  res.send('1')
+  res.send('2')
 })
 
 if (config.NODE_ENV !== 'development') {
