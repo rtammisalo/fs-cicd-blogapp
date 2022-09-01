@@ -39,6 +39,15 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           wait-on: http://localhost:3003/
+      - name: deploy to heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: intense-dusk-75932
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: "https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
+        if: ${{ (github.event_name == 'push') && (env.SKIP_DEPLOY == 'false') }}
     outputs:
       SKIP_DEPLOY: ${{ env.SKIP_DEPLOY }}
 
@@ -55,4 +64,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+          RELEASE_BRANCHES: main
         if: ${{ (github.event_name == 'push') && (needs.simple_deployment_pipeline.outputs.SKIP_DEPLOY == 'false') }}

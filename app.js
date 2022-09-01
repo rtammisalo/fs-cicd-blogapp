@@ -19,6 +19,14 @@ app.use('/api/login', loginRouter)
 app.use('/api/blogs', middleware.userExtractor, blogsRouter)
 app.use('/api/users', usersRouter)
 
+app.get('/health', (_req, res) => {
+  res.send('ok')
+})
+
+app.get('/version', (_req, res) => {
+  res.send('1')
+})
+
 if (config.NODE_ENV !== 'development') {
   app.use(express.static('build'))
 }
