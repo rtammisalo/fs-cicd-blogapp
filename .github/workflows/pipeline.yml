@@ -11,7 +11,7 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
-    # environment: Deployment
+    environment: Deployment
     env:
       SKIP_DEPLOY: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
     steps:
@@ -25,6 +25,11 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
+      - name: set env variables
+        run: |
+          set MONGODB_URI = ${{ secrets.MONGODB_URI }};
+          set TEST_MONGODB_URI = ${{ secrets.TEST_MONGODB_URI }};
+          set SECRET = ${{ secrets.SECRET }}
       - name: test backend
         run: |
           npm run start-test &
