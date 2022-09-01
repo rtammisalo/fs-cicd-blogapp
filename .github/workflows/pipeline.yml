@@ -25,11 +25,11 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      - name: set env variables
+      - name: create .env file
         run: |
-          set MONGODB_URI = ${{ secrets.MONGODB_URI }};
-          set TEST_MONGODB_URI = ${{ secrets.TEST_MONGODB_URI }};
-          set SECRET = ${{ secrets.SECRET }}
+          echo "MONGODB_URI = ${{ secrets.MONGODB_URI }}" > .env;
+          echo "TEST_MONGODB_URI = ${{ secrets.TEST_MONGODB_URI }}" >> .env;
+          echo "SECRET = ${{ secrets.SECRET }}" >> .env
       - name: test backend
         run: |
           npm run start-test &
