@@ -1,0 +1,39 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    # environment: Deployment
+    env:
+      SKIP_DEPLOY: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: npm install 
+        run: npm install  
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test backend
+        run: |
+          npm run start-test &
+          sleep 10 &
+          npm run test:backend
+      - name: e2e tests
+        uses: cypress-io/github-action@v4
+        with:
+          start: npm run start-test
+          wait-on: http://localhost:3003/
+    outputs:
+      SKIP_DEPLOY: ${{ env.SKIP_DEPLOY }}
