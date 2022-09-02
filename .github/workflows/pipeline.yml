@@ -45,7 +45,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "intense-dusk-75932"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: "https://intense-duck-75932.herokuapp.com/health"
+          healthcheck: "https://intense-dusk-75932.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
         if: ${{ (github.event_name == 'push') && (env.SKIP_DEPLOY == 'false') }}
       - name: Notify Discord on success
