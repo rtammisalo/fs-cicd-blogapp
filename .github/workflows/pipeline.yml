@@ -45,9 +45,25 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "intense-dusk-75932"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: "https://intense-dusk-75932.herokuapp.com/health"
+          healthcheck: "https://intense-duck-75932.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
         if: ${{ (github.event_name == 'push') && (env.SKIP_DEPLOY == 'false') }}
+      - name: Notify Discord on success
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ success() && (github.event_name == 'push') && (env.SKIP_DEPLOY == 'false')}}
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          text: A new version of BlogApp deployed to Heroku
+          description: To [https://intense-dusk-75932.herokuapp.com/](https://intense-dusk-75932.herokuapp.com/) by ${{ github.event.head_commit.author.username }}
+          severity: info
+      - name: Notify Discord on failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ failure() && (github.event_name == 'push') }}
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          text: New build of BlogApp failed
+          description: Broken commit [${{ github.event.head_commit.url }}](${{ github.event.head_commit.url }}) by ${{ github.event.head_commit.author.username }}
+          severity: error
     outputs:
       SKIP_DEPLOY: ${{ env.SKIP_DEPLOY }}
 
