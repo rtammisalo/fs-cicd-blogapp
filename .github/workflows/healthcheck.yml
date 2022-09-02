@@ -1,0 +1,19 @@
+name: Periodic health check
+
+on:
+#  push:
+#    branches:
+#      - master
+  schedule:
+    - cron: '1 * * * *' # Run at every first minute of every hour
+
+jobs:
+  periodic_health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: periodic health check
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://intense-dusk-75932.herokuapp.com/health
+          max-attempts: 2
+          retry-delay: 5s
