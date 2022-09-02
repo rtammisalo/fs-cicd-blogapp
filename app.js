@@ -2,6 +2,7 @@ const express = require('express')
 require('express-async-errors')
 const mongoose = require('mongoose')
 const app = express()
+const path = require('node:path')
 const cors = require('cors')
 const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
@@ -27,10 +28,6 @@ app.get('/version', (_req, res) => {
   res.send('2')
 })
 
-if (config.NODE_ENV !== 'development') {
-  app.use(express.static('build'))
-}
-
 if (process.env.NODE_ENV === 'test') {
   console.log('Running in TEST mode')
   const resetRouter = require('./controllers/reset')
@@ -38,5 +35,12 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 app.use(middleware.errorHandler)
+
+if (config.NODE_ENV !== 'development') {
+  app.use(express.static('build'))
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(__dirname, 'build/index.html'))
+  })
+}
 
 module.exports = app
