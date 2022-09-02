@@ -1,11 +1,11 @@
 name: Periodic health check
 
 on:
-#  push:
-#    branches:
-#      - master
-  schedule:
-    - cron: '1 * * * *' # Run at every first minute of every hour
+  push:
+    branches:
+      - master
+#  schedule:
+#    - cron: '1 * * * *' # Run at every first minute of every hour
 
 jobs:
   periodic_health_check:
