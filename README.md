@@ -14,3 +14,7 @@ TEST_MONGODB_URI=mongodb+srv ...
 PORT= ..
 SECRET= ...
 ```
+
+## Link to the previous exercises of part 9
+
+[https://github.com/rtammisalo/full-stack-open-pokedex](https://github.com/rtammisalo/full-stack-open-pokedex)
